@@ -4,33 +4,33 @@ import Collection from '@lariat/playwright';
 export class homePage extends Collection<Page> {
 
     // Nav menu links
-    readonly navMenuWomen = this.page.locator('.nav-1');
-    readonly navMenuMan = this.page.locator('.nav-2');
-    readonly navMenuAccessories = this.page.locator('.nav-3');
-    readonly navMenuHomeDecor = this.page.locator('.nav-4');
-    readonly navMenuSale = this.page.locator('.nav-5');
-    readonly navMenuVip = this.page.locator('.nav-6');
+    readonly navMenuWomen = this.page.getByRole('link', { name: 'Women', exact: true });
+    readonly navMenuMan = this.page.getByRole('link', { name: 'Men', exact: true });
+    readonly navMenuAccessories = this.page.getByRole('link', { name: 'Accessories', exact: true });
+    readonly navMenuHomeDecor = this.page.getByRole('link', { name: 'Home & Decor', exact: true });
+    readonly navMenuSale = this.page.getByRole('link', { name: 'Sale', exact: true });
+    readonly navMenuVip = this.page.getByRole('link', { name: 'VIP' });
 
     // Promo links
-    readonly promoHomeDecorLink = this.page.getByAltText('Physical & Virtual Gift Cards');
-    readonly promoPrivateSalesLink = this.page.getByAltText('Shop Private Sales - Members Only');
-    readonly promoTravelGearLink = this.page.getByAltText('Travel Gear for Every Occasion');
+    readonly promoHomeDecorLink = this.page.getByRole('link', { name: 'Physical & Virtual Gift Cards' });
+    readonly promoPrivateSalesLink = this.page.getByRole('link', { name: 'Shop Private Sales - Members' });
+    readonly promoTravelGearLink = this.page.getByRole('link', { name: 'Travel Gear for Every Occasion' });
 
     // New products
     readonly firstNewProductName = this.page.locator('li:nth-of-type(1) > .product-info > .product-name');
     readonly firstNewProductPrice = this.page.locator('li:nth-of-type(1) > .product-info  .regular-price > .price');
 
     // Footer links
-    readonly aboutUs = this.page.getByText('About Us');
-    readonly contactUs = this.page.getByText('Contact Us');
-    readonly customerService = this.page.getByText('Customer Service');
-    readonly privacyPolicy = this.page.getByText('Privacy Policy');
-    readonly aboutTealium = this.page.getByText('About Tealium');
-    readonly siteMap = this.page.getByText('Site Map');
-    readonly searchTerms = this.page.getByText('Search Terms');
-    readonly advancedSearch = this.page.getByText('Advanced Search');
+    readonly aboutUs = this.page.getByRole('link', { name: 'About Us' });
+    readonly contactUs = this.page.getByRole('link', { name: 'Contact Us' });
+    readonly customerService = this.page.getByRole('link', { name: 'Customer Service' });
+    readonly privacyPolicy = this.page.getByRole('link', { name: 'Privacy Policy' });
+    readonly aboutTealium = this.page.getByRole('link', { name: 'About Tealium' });
+    readonly siteMap = this.page.getByRole('link', { name: 'Site Map' });
+    readonly searchTerms = this.page.getByRole('link', { name: 'Search Terms' });
+    readonly advancedSearch = this.page.getByRole('link', { name: 'Advanced Search' });
     readonly myAccount = this.page.getByRole('link', { name: 'My Account' });
-    readonly ordersAndReturns = this.page.getByText('Orders and Returns');
+    readonly ordersAndReturns = this.page.getByRole('link', { name: 'Orders and Returns' });
 
     async goToHomePage() {
         await this.page.goto('/');
