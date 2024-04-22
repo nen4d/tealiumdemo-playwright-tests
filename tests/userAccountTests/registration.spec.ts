@@ -40,7 +40,7 @@ test('Duplicate Email Registration', async ({page}) => {
     // Registration data
     const firstNameField = process.env.FIRST_NAME;
     const lastNameField = process.env.LAST_NAME;
-    const emailField = process.env.EXISTING_EMAIL;
+    const emailField = process.env.EMAIL;
     const passwordField = process.env.PASSWORD;
 
     await createAccountPage.newRegistrationData(firstNameField, lastNameField, emailField, passwordField);
@@ -84,7 +84,7 @@ test('Short Password', async ({page}) => {
     const firstNameField = process.env.FIRST_NAME;
     const lastNameField = process.env.LAST_NAME;
     const emailField = process.env.EMAIL;
-    const passwordField = process.env.SHORT_PASSWORD;
+    const passwordField = 'shortp'; // Password must be atleast 7 characters and this one is 6
 
     // Adding two random numbers on email to avoid email duplication
     const randomNumber1 = Math.floor(Math.random() * 10);
