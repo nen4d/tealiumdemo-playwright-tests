@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { registrationPage } from '../../pages/registrationPage.ts';
+import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+dotenv.config({ path: path.resolve(__dirname, '..', 'my.env') });
 
 test('Valid Registration', async ({page}) => {
 
@@ -7,14 +13,15 @@ test('Valid Registration', async ({page}) => {
     await createAccountPage.GoToRegistrationPage();
 
     // Registration data
-    const firstNameField = 'John';
-    const lastNameField = 'Burke';
-    const emailField = 'JohnBurke';
-    const passwordField = 'JohnPassword';
+    const firstNameField = process.env.FIRST_NAME;
+    const lastNameField = process.env.LAST_NAME;
+    const emailField = process.env.EMAIL;
+    const passwordField = process.env.PASSWORD;
 
+    // Adding two random numbers on email to avoid email duplication
     const randomNumber1 = Math.floor(Math.random() * 10);
     const randomNumber2 = Math.floor(Math.random() * 10);
-    const newEmailAddress = `${emailField}${randomNumber1}${randomNumber2}@email.com`;
+    const newEmailAddress = `${randomNumber1}${randomNumber2}${emailField}`;
 
     await createAccountPage.newRegistrationData(firstNameField, lastNameField, newEmailAddress, passwordField);
 
@@ -31,10 +38,10 @@ test('Duplicate Email Registration', async ({page}) => {
     await createAccountPage.GoToRegistrationPage();
 
     // Registration data
-    const firstNameField = 'John';
-    const lastNameField = 'Burke';
-    const emailField = 'demo@demo.com'; // We already know this email have been used before
-    const passwordField = 'JohnPassword';
+    const firstNameField = process.env.FIRST_NAME;
+    const lastNameField = process.env.LAST_NAME;
+    const emailField = process.env.EXISTING_EMAIL;
+    const passwordField = process.env.PASSWORD;
 
     await createAccountPage.newRegistrationData(firstNameField, lastNameField, emailField, passwordField);
 
@@ -74,14 +81,15 @@ test('Short Password', async ({page}) => {
 
     // Registration data
     // Password must be atleast 7 characters
-    const firstNameField = 'John';
-    const lastNameField = 'Burke';
-    const emailField = 'JohnBurke'; // 6 characters
-    const passwordField = 'shortp';
+    const firstNameField = process.env.FIRST_NAME;
+    const lastNameField = process.env.LAST_NAME;
+    const emailField = process.env.EMAIL;
+    const passwordField = process.env.SHORT_PASSWORD;
 
+    // Adding two random numbers on email to avoid email duplication
     const randomNumber1 = Math.floor(Math.random() * 10);
     const randomNumber2 = Math.floor(Math.random() * 10);
-    const newEmailAddress = `${emailField}${randomNumber1}${randomNumber2}@email.com`;
+    const newEmailAddress = `${randomNumber1}${randomNumber2}${emailField}`;
 
     await createAccountPage.newRegistrationData(firstNameField, lastNameField, newEmailAddress, passwordField);
 
@@ -95,14 +103,15 @@ test('Mismatched Passwords', async ({page}) => {
     await createAccountPage.GoToRegistrationPage();
 
     // Registration data
-    const firstNameField = 'John';
-    const lastNameField = 'Burke';
-    const emailField = 'JohnBurke'; 
-    const passwordField = 'JohnPassword';
+    const firstNameField = process.env.FIRST_NAME;
+    const lastNameField = process.env.LAST_NAME;
+    const emailField = process.env.EMAIL;
+    const passwordField = process.env.PASSWORD;
 
+    // Adding two random numbers on email to avoid email duplication
     const randomNumber1 = Math.floor(Math.random() * 10);
     const randomNumber2 = Math.floor(Math.random() * 10);
-    const newEmailAddress = `${emailField}${randomNumber1}${randomNumber2}@email.com`;
+    const newEmailAddress = `${randomNumber1}${randomNumber2}${emailField}`;
 
     await createAccountPage.newRegistrationData(firstNameField, lastNameField, newEmailAddress, passwordField);
 

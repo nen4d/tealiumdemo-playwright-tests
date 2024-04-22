@@ -12,6 +12,7 @@
     "@types/node": "^20.12.7"
   },
   "dependencies": {
-    "@lariat/playwright": "^2.2.0"
+    "@lariat/playwright": "^2.2.0",
+    "dotenv": "^16.4.5"
   }
 }
