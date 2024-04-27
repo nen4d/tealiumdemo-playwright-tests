@@ -17,4 +17,6 @@ export class loginPage extends Collection<Page> {
         await this.loginButton.click();
     }
 
+    
+
 }
