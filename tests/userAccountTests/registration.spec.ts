@@ -107,16 +107,18 @@ test('Mismatched Passwords', async ({page}) => {
     const lastNameField = process.env.LAST_NAME;
     const emailField = process.env.EMAIL;
     const passwordField = process.env.PASSWORD;
+    const confirmPasswordField = 'differentpassword';
 
     // Adding two random numbers on email to avoid email duplication
     const randomNumber1 = Math.floor(Math.random() * 10);
     const randomNumber2 = Math.floor(Math.random() * 10);
     const newEmailAddress = `${randomNumber1}${randomNumber2}${emailField}`;
 
-    await createAccountPage.newRegistrationData(firstNameField, lastNameField, newEmailAddress, passwordField);
+    // await createAccountPage.newRegistrationData(firstNameField, lastNameField, newEmailAddress, passwordField);
 
-    await createAccountPage.passwordConfirmInput.fill('differentpassword');
+    // await createAccountPage.passwordConfirmInput.fill('differentpassword');
 
-    await expect(page.getByText('Please make sure your')).toBeVisible();
+    await createAccountPage.mismatchedPasswords(firstNameField, lastNameField, newEmailAddress, passwordField, confirmPasswordField);
+
 
 })

@@ -34,6 +34,24 @@ export class registrationPage extends Collection<Page> {
         await this.newsletterCheckbox.check();
         await this.registerButton.click();
     }
+
+    async mismatchedPasswords(firstName, lastName, emailAddress, password, confirmPassword) {
+        // Check if the input fields are visible and enabled before interacting with them
+        await this.firstNameInput.isVisible();
+        await this.lastNameInput.isVisible();
+        await this.emailAddressInput.isVisible();
+        await this.passwordInput.isVisible();
+        await this.passwordConfirmInput.isVisible();
+        
+        // Fill in the input fields and interact with other elements
+        await this.firstNameInput.fill(firstName);
+        await this.lastNameInput.fill(lastName);
+        await this.emailAddressInput.fill(emailAddress);
+        await this.passwordInput.fill(password);
+        await this.passwordConfirmInput.fill(confirmPassword);
+        await this.newsletterCheckbox.check();
+        await this.registerButton.click();
+    }
     
 
 }

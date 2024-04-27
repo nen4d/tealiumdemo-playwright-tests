@@ -32,12 +32,12 @@ test('Edit Account Information and Verify Changes', async ({page}) => {
     await dashboardPage.accountInformationMenu.click();
 
     // Changing account information
-    await dashboardPage.editInformationsAndAssert(newFirstName, newLastName, password);
+    await dashboardPage.editInformationAndAssert(newFirstName, newLastName, password);
 
     await dashboardPage.goToDashboardPage();
 
     // Reverting changes to avoid failuer because of other tests with previous data
     await dashboardPage.accountInformationMenu.click();
-    await dashboardPage.editInformationsAndAssert(firstName, lastName, password);
+    await dashboardPage.editInformationAndAssert(firstName, lastName, password);
 
 })
