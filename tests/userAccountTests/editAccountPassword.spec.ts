@@ -8,8 +8,6 @@ dotenv.config();
 
 dotenv.config({ path: path.resolve(__dirname, '..', 'my.env') });
 
-// NOTE: This test isnt final, sometimes pages redirects to homepage instead of account dashboard
-// with confirmation message, trying to figure out the things out and complete the test
 test('Edit Account Password and Verify Changes', async ({page}) => {
 
     const firstName = process.env.FIRST_NAME;

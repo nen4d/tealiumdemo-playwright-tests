@@ -13,6 +13,10 @@ export class accountPage extends Collection<Page> {
 
     // Left navigation of account page
     readonly accountInformationMenu = this.page.getByRole('link', { name: 'Account Information' });
+    readonly addressBookMenu = this.page.getByRole('link', { name: 'Address Book' });
+    readonly changeBillingAddress = this.page.getByRole('link', { name: 'Change Billing Address' });
+    readonly changeShippingAddress = this.page.getByRole('link', { name: 'Change Shipping Address' });
+    readonly addNewAddressMenu = this.page.getByRole('button', { name: 'Add New Address' });
 
     // Top dropdown navigaction for users
     readonly accountNavLink = this.page.getByRole('link', { name: 'Account', exact: true });
@@ -24,12 +28,22 @@ export class accountPage extends Collection<Page> {
     readonly currentPassword = this.page.getByLabel('*Current Password');
     readonly newPassword = this.page.getByLabel('*New Password');
     readonly confirmNewPassword = this.page.getByLabel('*Confirm New Password');
+    // Address inputs
+    readonly telephoneInput = this.page.getByLabel('*Telephone');
+    readonly streetAddressInput = this.page.getByLabel('*Street Address');
+    readonly cityInput = this.page.getByLabel('*City');
+    readonly zipinput = this.page.getByLabel('*Zip/Postal Code');
+    readonly stateOptions = this.page.locator('#region_id');
+    readonly countryOptions = this.page.locator('#country');
 
     // Buttons
     readonly saveChangesButton = this.page.getByRole('button', { name: 'Save' });
+    readonly saveAddressButton = this.page.getByRole('button', { name: 'Save Address' });
 
     // Checkboxes
     readonly editPasswordCheckbox = this.page.getByLabel('Change Password');
+    readonly defaultBillingAddressCheckbox = this.page.getByLabel('Use as my default billing');
+    readonly defaultShippingAddressCheckbox = this.page.getByLabel('Use as my default shipping');
 
 
     async goToDashboardPage() {
@@ -42,15 +56,11 @@ export class accountPage extends Collection<Page> {
     }
 
     async clickDashboardLinksAndAssert(linkName: Locator, expectedURL: string) {
-
         await linkName.click();
-
         // Assert the expected page URL;
         await expect(this.page).toHaveURL(expectedURL);
-    
         // Navigate back to the home page
         await this.goToDashboardPage();
-
     }
 
     async editInformationAndAssert(firstNameField, lastNameField, passwordField) {
@@ -68,6 +78,16 @@ export class accountPage extends Collection<Page> {
         await this.newPassword.fill(newPassword);
         await this.confirmNewPassword.fill(newPassword);
         await this.saveChangesButton.click();
+    }
+
+    async changeBillingAddres(telNumber, street, city, state, zip, country) {
+        await this.telephoneInput.fill(telNumber);
+        await this.streetAddressInput.fill(street);
+        await this.cityInput.fill(city);
+        await this.stateOptions.selectOption(state);
+        await this.zipinput.fill(zip);
+        await this.countryOptions.selectOption(country);
+        await this.saveAddressButton.click();
     }
 
 }

@@ -40,9 +40,9 @@ test('Account dashboard links', async ({page}) => {
         '/customer/account/edit/',
         '/newsletter/manage/',
         '/customer/account/edit/changepass/1/',
-        '/customer/address/new/',
-        '/customer/address/edit/',
-        '/customer/address/edit/'
+        '/customer/address/',
+        '/customer/address/edit/id/5896/',
+        '/customer/address/edit/id/5896/'
     ]
 
     for(let i=0; i < dashboardLinks.length; i++) {
