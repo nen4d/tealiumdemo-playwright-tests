@@ -7,10 +7,14 @@ dotenv.config();
 
 dotenv.config({ path: path.resolve(__dirname, '..', 'my.env') });
 
+test.beforeEach( async ({page}) => {
+    const createAccountPage = new registrationPage(page);
+    await createAccountPage.GoToRegistrationPage();
+})
+
 test('Valid Registration', async ({page}) => {
 
     const createAccountPage = new registrationPage(page);
-    await createAccountPage.GoToRegistrationPage();
 
     // Registration data
     const firstNameField = process.env.FIRST_NAME;
@@ -35,7 +39,6 @@ test('Valid Registration', async ({page}) => {
 test('Duplicate Email Registration', async ({page}) => {
 
     const createAccountPage = new registrationPage(page);
-    await createAccountPage.GoToRegistrationPage();
 
     // Registration data
     const firstNameField = process.env.FIRST_NAME;
@@ -52,7 +55,6 @@ test('Duplicate Email Registration', async ({page}) => {
 test('Empty Field Validation', async ({page}) => {
 
     const createAccountPage = new registrationPage(page);
-    await createAccountPage.GoToRegistrationPage();
 
     const requiredFields = [
         'firstname',
@@ -77,7 +79,6 @@ test('Empty Field Validation', async ({page}) => {
 test('Short Password', async ({page}) => {
 
     const createAccountPage = new registrationPage(page);
-    await createAccountPage.GoToRegistrationPage();
 
     // Registration data
     // Password must be atleast 7 characters
@@ -100,7 +101,6 @@ test('Short Password', async ({page}) => {
 test('Mismatched Passwords', async ({page}) => {
 
     const createAccountPage = new registrationPage(page);
-    await createAccountPage.GoToRegistrationPage();
 
     // Registration data
     const firstNameField = process.env.FIRST_NAME;
