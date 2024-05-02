@@ -7,13 +7,17 @@ dotenv.config();
 
 dotenv.config({ path: path.resolve(__dirname, '..', 'my.env') });
 
+test.beforeEach(async ({page}) => {
+    const login = new loginPage(page);
+    await login.goToLoginPage();
+})
+
 test('Successful login', async ({page}) => {
 
     const emailAddress = process.env.EMAIL;
     const password = process.env.PASSWORD;
 
     const login = new loginPage(page);
-    await login.goToLoginPage();
 
     await login.loginIntoAccount(emailAddress, password);
 
@@ -28,7 +32,6 @@ test('Unsuccessful login with invalid email', async ({page}) => {
     const password = process.env.PASSWORD;
 
     const login = new loginPage(page);
-    await login.goToLoginPage();
 
     await login.loginIntoAccount(emailAddress, password);
 
@@ -42,7 +45,6 @@ test('Unsuccessful login with invalid password', async ({page}) => {
     const password = 'invalidPassword';
 
     const login = new loginPage(page);
-    await login.goToLoginPage();
 
     await login.loginIntoAccount(emailAddress, password);
 
@@ -56,7 +58,6 @@ test('Unsuccessful login with empty email field', async ({page}) => {
     const password = process.env.PASSWORD;
 
     const login = new loginPage(page);
-    await login.goToLoginPage();
 
     await login.loginIntoAccount(emailAddress, password);
 
@@ -70,7 +71,6 @@ test('Unsuccessful login with empty password field', async ({page}) => {
     const password = '';
 
     const login = new loginPage(page);
-    await login.goToLoginPage();
 
     await login.loginIntoAccount(emailAddress, password);
 
