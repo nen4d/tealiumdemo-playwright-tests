@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { loginPage } from '../../pages/loginPage.ts';
-import { accountPage } from '../../pages/accountPage.ts';
+import { loginPage } from '../../pages/Authentication/loginPage.ts';
+import { accountPage } from '../../pages/Account/accountPage.ts';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -87,3 +87,38 @@ test('Change Shipping Address', async ({page}) => {
     expect(addressText).toContain('United States')
 
 })
+
+// This site is broken, need fixes
+// test('Add New Address', async ({page}) => {
+
+//     const dashboardPage = new accountPage(page);
+
+//     await expect(page).toHaveURL('/customer/account/');
+
+//     // Address data
+//     const telephoneNumber = '(520) 319-2467';
+//     const streetAddress = '	2829 E Speedway Blvd';
+//     const city = 'Tucson';
+//     const state = '5';
+//     const zip = '85716';
+//     const country = 'US';
+
+//     await dashboardPage.addressBookMenu.click();
+//     await dashboardPage.addNewAddressButton.click();
+
+//     await dashboardPage.changeBillingAddres(telephoneNumber, streetAddress, city, state, zip, country);
+
+//     await expect(page.getByText('The address has been saved.')).toBeVisible();
+
+//     // const shippingAddressLi = page.locator('li').filter({ hasText: 'Default Shipping Address John' });
+//     // const addressElement = shippingAddressLi.locator('address');
+
+//     // const addressText = await addressElement.innerText();
+
+//     // expect(addressText).toContain(telephoneNumber);
+//     // expect(addressText).toContain(streetAddress);
+//     // expect(addressText).toContain(city);
+//     // expect(addressText).toContain(zip);
+//     // expect(addressText).toContain('United States')
+
+// })

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { homePage } from '../../pages/homePage.ts';
+import { homePage } from '../../pages/HomePage/homePage.ts';
 
 test('Footer links', async ({page}) => {
 

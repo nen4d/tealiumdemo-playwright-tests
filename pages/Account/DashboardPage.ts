@@ -39,6 +39,7 @@ export class accountPage extends Collection<Page> {
     // Buttons
     readonly saveChangesButton = this.page.getByRole('button', { name: 'Save' });
     readonly saveAddressButton = this.page.getByRole('button', { name: 'Save Address' });
+    readonly addNewAddressButton = this.page.getByRole('button', { name: 'Add New Address' });
 
     // Checkboxes
     readonly editPasswordCheckbox = this.page.getByLabel('Change Password');
@@ -81,6 +82,16 @@ export class accountPage extends Collection<Page> {
     }
 
     async changeBillingAddres(telNumber, street, city, state, zip, country) {
+        await this.telephoneInput.fill(telNumber);
+        await this.streetAddressInput.fill(street);
+        await this.cityInput.fill(city);
+        await this.stateOptions.selectOption(state);
+        await this.zipinput.fill(zip);
+        await this.countryOptions.selectOption(country);
+        await this.saveAddressButton.click();
+    }
+
+    async addNewAddress(telNumber, street, city, state, zip, country) {
         await this.telephoneInput.fill(telNumber);
         await this.streetAddressInput.fill(street);
         await this.cityInput.fill(city);
