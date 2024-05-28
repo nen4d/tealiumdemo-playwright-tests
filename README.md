@@ -3,6 +3,7 @@
 ## **Description**
 
 This project contains automated tests for various functionalities of the dummy online shop, Tealiumdemo. The tests are written using Playwright and utilize Lariat for managing Page Object Model (POM) files. The covered functionalities include links, login, registration, orders, wishlist, editing account information, and managing addresses.
+URL: https://ecommerce.tealiumdemo.com/
 
 ## **Testing**
 
