@@ -19,7 +19,7 @@ The project includes a variety of tests for the online shop. Here are the primar
 
 ## **Contributing**
 
-We welcome contributions to enhance the project. Follow these steps to contribute:
+I welcome contributions to enhance the project. Follow these steps to contribute:
 
 1. **Fork the repository.**
 2. **Create a new branch (`git checkout -b feature/your-feature-name`).**
@@ -29,7 +29,7 @@ We welcome contributions to enhance the project. Follow these steps to contribut
 
 ## **Contact**
 
-For questions or feedback, you can reach me at [your-email@example.com].
+For questions or feedback, you can reach me at nen4d@protonmail.com.
 
 ## **Technologies Used**
 
