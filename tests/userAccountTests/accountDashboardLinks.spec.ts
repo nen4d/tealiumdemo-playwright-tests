@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { loginPage } from '../../pages/Authentication/loginPage.ts';
-import { accountPage } from '../../pages/Account/DashboardPage.ts';
+import { AccountDashboardLinksPage } from '../../pages/Account/AccountDashboardLinksPage.ts';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -18,7 +18,7 @@ test('Account dashboard links', async ({page}) => {
     const login = new loginPage(page);
     await login.goToLoginPage();
 
-    const dashboardPage = new accountPage(page);
+    const dashboardPage = new AccountDashboardLinksPage(page);
 
     await login.loginIntoAccount(emailAddress, password);
 

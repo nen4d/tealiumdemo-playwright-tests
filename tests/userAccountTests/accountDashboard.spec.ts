@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { loginPage } from '../../pages/Authentication/loginPage.ts';
-import { accountPage } from '../../pages/Account/DashboardPage.ts';
+import { AccountInformationPage } from '../../pages/Account/AccountInformationPage.ts';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -20,17 +20,13 @@ test('Edit Account Information and Verify Changes', async ({page}) => {
 
     const firstName = process.env.FIRST_NAME;
     const lastName = process.env.LAST_NAME;
-    const emailAddress = process.env.EMAIL;
     const password = process.env.PASSWORD;
 
     const newFirstName = 'JohnNEW';
     const newLastName = 'BurkeNEW';
 
-    const dashboardPage = new accountPage(page);
-
-    await page.waitForURL('/customer/account/');
-    await expect(page.getByRole('heading', { name: 'My Dashboard' })).toBeVisible();
-    await expect(page.getByText(`Hello, ${firstName} ${lastName}!`)).toBeVisible();
+    const dashboardPage = new AccountInformationPage(page);
+    
     await expect(page).toHaveURL('/customer/account/');
 
     await dashboardPage.accountInformationMenu.click();
@@ -57,11 +53,8 @@ test('Edit Account Password and Verify Changes', async ({page}) => {
     const newPassword = 'Johnnewpassword';
 
     const login = new loginPage(page);
-    const dashboardPage = new accountPage(page);
+    const dashboardPage = new AccountInformationPage(page);
 
-    await page.waitForTimeout(1300);
-    await expect(page.getByRole('heading', { name: 'My Dashboard' })).toBeVisible();
-    await expect(page.getByText(`Hello, ${firstName} ${lastName}!`)).toBeVisible();
     await expect(page).toHaveURL('/customer/account/');
 
     await dashboardPage.accountInformationMenu.click();

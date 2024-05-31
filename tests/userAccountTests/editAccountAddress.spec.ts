@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { loginPage } from '../../pages/Authentication/loginPage.ts';
-import { accountPage } from '../../pages/Account/accountPage.ts';
+import { addressBookPage } from '../../pages/Account/AddressBookPage.ts';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -22,7 +22,7 @@ test.beforeEach(async ({page}) => {
 
 test('Change Billing Address', async ({page}) => {
 
-    const dashboardPage = new accountPage(page);
+    const dashboardPage = new addressBookPage(page);
 
     await expect(page).toHaveURL('/customer/account/');
 
@@ -56,7 +56,7 @@ test('Change Billing Address', async ({page}) => {
 
 test('Change Shipping Address', async ({page}) => {
 
-    const dashboardPage = new accountPage(page);
+    const dashboardPage = new addressBookPage(page);
 
     await expect(page).toHaveURL('/customer/account/');
 

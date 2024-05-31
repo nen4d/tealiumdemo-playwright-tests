@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { registrationPage } from '../../pages/registrationPage.ts';
+import { registrationPage } from '../../pages/Authentication/registrationPage.ts';
 import path from 'path';
 import dotenv from 'dotenv';
 

@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { loginPage } from '../../pages/Authentication/loginPage.ts';
-import { accountPage } from '../../pages/Account/accountPage.ts';
 import { homePage } from '../../pages/HomePage/homePage.ts';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -18,19 +17,15 @@ test.beforeEach(async ({page}) => {
 
     await login.loginIntoAccount(emailAddress, password);
 })
-test('Place an order and check his existence in ORDERS page of account', async ({page}) => {
 
-    const dashboardPage = new accountPage(page);
+test('Pick an item and order it then check order history', async ({page}) => {
+
     const mainPage = new homePage(page);
+    await mainPage.navMenuMan.click();
 
-    await expect(page).toHaveURL('/customer/account/');
-
-    await mainPage.navMenuAccessories.click();
-    await page.locator('li').filter({ hasText: 'Jackie O Round Sunglasses' }).getByRole('button').click();
-    await page.getByRole('textbox', { name: 'Qty' }).fill('1');
-    await page.getByRole('button', { name: 'Update', exact: true }).click();
-    await page.waitForTimeout(2500);
-    await dashboardPage.stateOptions.selectOption('7');
-    await page.getByLabel('*Zip').fill('21421');
+    await page.getByText('Chelsea Tee').nth(1).click();
+    await page.getByRole('link', { name: 'White' }).click();
+    await page.getByRole('link', { name: 'S', exact: true }).click();
+    await page.getByRole('button', { name: 'Add to Cart' }).click();
 
 })
