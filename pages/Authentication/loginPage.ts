@@ -3,8 +3,9 @@ import Collection from '@lariat/playwright';
 
 export class loginPage extends Collection<Page> {
 
-    readonly emailAddressField = this.page.getByLabel('*Email Address');
-    readonly passwordField = this.page.getByLabel('*Password');
+    // readonly emailAddressField = this.page.getByLabel('*Email Address');
+    readonly emailAddressField = this.page.locator('#login-email');
+    readonly passwordField = this.page.locator('#login-password');
     readonly loginButton = this.page.getByRole('button', { name: 'Login' });
 
     async goToLoginPage() {

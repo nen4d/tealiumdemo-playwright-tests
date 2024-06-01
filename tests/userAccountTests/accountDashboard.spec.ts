@@ -26,7 +26,10 @@ test('Edit Account Information and Verify Changes', async ({page}) => {
     const newLastName = 'BurkeNEW';
 
     const dashboardPage = new AccountInformationPage(page);
-    
+
+    await page.waitForURL('/customer/account/');
+    await expect(page.getByRole('heading', { name: 'My Dashboard' })).toBeVisible();
+    await expect(page.getByText(`Hello, ${firstName} ${lastName}!`)).toBeVisible();
     await expect(page).toHaveURL('/customer/account/');
 
     await dashboardPage.accountInformationMenu.click();
