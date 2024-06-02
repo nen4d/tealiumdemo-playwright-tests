@@ -11,8 +11,8 @@ dotenv.config({ path: path.resolve(__dirname, '..', 'my.env') });
 
 test('Pick an item and order it then check order history', async ({page}) => {
 
-    const emailAddress = process.env.EMAIL;
-    const password = process.env.PASSWORD;
+    const emailAddress = process.env.EMAIL as string;
+    const password = process.env.PASSWORD as string;;
     const login = new loginPage(page);
     const mainPage = new homePage(page);
     const orderPage = new accountOrders(page);
@@ -22,22 +22,30 @@ test('Pick an item and order it then check order history', async ({page}) => {
     await mainPage.navMenuMan.click();
 
     // Hard coded the item which we want to purchase
-    await page.getByText('Chelsea Tee').nth(1).click();
-    await page.waitForURL('/chelsea-tee-735.html');
-    await orderPage.whiteColorItem.click();
-    await orderPage.sizeS.click();
-    await orderPage.addToCartButton.click();
+    const ChelseaTeeItem = await page.getByText('Chelsea Tee').nth(1);
+    const itemColor = await orderPage.whiteColorItem;
+    const itemSize = await orderPage.sizeS;
+    const stateArizona = '4';
+    const zip = '5252';
 
-    await orderPage.stateSelection.selectOption('4');
-    await orderPage.zipCode.fill('5252');
-    await orderPage.checkoutButton.click();
 
-    await login.loginIntoAccount(emailAddress, password);
+    await orderPage.orderItem(ChelseaTeeItem, 
+                            itemColor, 
+                            itemSize, 
+                            stateArizona, 
+                            zip, 
+                            login, 
+                            emailAddress, 
+                            password);
 
-    await orderPage.completeOrderSteps(3);
+    // Assertion for item purchase
+    await expect(page.getByRole('heading', { name: 'Your order has been received.' })).toBeVisible();
     
-    await orderPage.placeOrderButton.click();
+    // Getting order ID
+    const orderTextAndID = await page.getByText('Your order # is:').allTextContents();
+    const orderText = orderTextAndID.join(' '); 
+    const orderID = orderText.replace(/\D/g,'');
 
-    await expect(page.getByRole('heading', { name: 'Your order has been received.' })).toHaveText('Your order has been received.')
+    await orderPage.checkOrderHistory(orderID);
 
 })
