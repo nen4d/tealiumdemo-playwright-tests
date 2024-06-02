@@ -23,11 +23,15 @@ test('Pick an item and order it then check order history', async ({page}) => {
 
     // Hard coded the item which we want to purchase
     const ChelseaTeeItem = await page.getByText('Chelsea Tee').nth(1);
+    const itemNameText = await ChelseaTeeItem.textContent();
     const itemColor = await orderPage.whiteColorItem;
     const itemSize = await orderPage.sizeS;
     const stateArizona = '4';
     const zip = '5252';
 
+    // I will update this code soon, but for now I will just hard core color and size
+    const itemColorText = 'White';
+    const itemSizeText = 'S';
 
     await orderPage.orderItem(ChelseaTeeItem, 
                             itemColor, 
@@ -46,6 +50,6 @@ test('Pick an item and order it then check order history', async ({page}) => {
     const orderText = orderTextAndID.join(' '); 
     const orderID = orderText.replace(/\D/g,'');
 
-    await orderPage.checkOrderHistory(orderID);
+    await orderPage.checkOrderHistory(orderID, itemNameText, itemColorText, itemSizeText);
 
 })

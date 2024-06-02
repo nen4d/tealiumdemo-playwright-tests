@@ -10,7 +10,7 @@ export class accountOrders extends Collection<Page> {
     readonly myOrdersNavigation = this.page.getByRole('link', { name: 'My Orders' });
 
     // Purchase item options
-    readonly whiteColorItem = this.page.getByTitle('White');
+    readonly whiteColorItem = this.page.getByTitle('White').first();
     readonly sizeS = this.page.getByRole('link', { name: 'S', exact: true });
     readonly stateSelection = this.page.locator('#region_id');
     readonly zipCode = this.page.getByLabel('*Zip');
@@ -55,11 +55,17 @@ export class accountOrders extends Collection<Page> {
         await this.placeOrderButton.click();
     }
 
-    async checkOrderHistory(orderID) {
+    async checkOrderHistory(orderID, itemName, itemColor, itemSize) {
+        //Check if order ID from our purchase exist in order history
         await this.accountLinkNavigation.click();
         await this.myAccountLinkNavigation.click();
         await this.myOrdersNavigation.click();
         await expect(this.page.getByRole('cell', { name: orderID })).toBeVisible();
-    }
+
+        //Check purchase details if correct
+        await this.page.getByRole('row', { name: `${orderID} 6/2/2024 John Burke` }).getByRole('link').first().click();
+        await expect(this.page.locator('#my-orders-table')).toContainText(`${itemName} Color ${itemColor} Size ${itemSize}`);
+        // // console.log()
+      }
 
 }
